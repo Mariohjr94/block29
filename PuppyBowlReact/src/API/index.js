@@ -11,8 +11,14 @@ const puppyBowlApi = createApi({
     getPlayers: builder.query({
       query: () => "players/", // Endpoint URL
     }),
+    deletePlayer: builder.mutation({
+      query: (playerId) => ({
+        url: `players/${playerId}/`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetPlayersQuery } = puppyBowlApi;
+export const { useGetPlayersQuery, useDeletePlayerMutation } = puppyBowlApi;
 export default puppyBowlApi;
