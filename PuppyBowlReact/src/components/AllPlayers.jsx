@@ -2,6 +2,9 @@ import { useGetPlayersQuery } from "../API/index";
 import { useDeletePlayerMutation } from "../API/index";
 import "../../src/index.css";
 import store from "../APP/store";
+import "bootstrap/dist/css/bootstrap.css";
+// import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
 
 const Players = () => {
   const { data, error, isLoading } = useGetPlayersQuery();
@@ -25,31 +28,36 @@ const Players = () => {
   console.log(data);
 
   return (
-    <div className="players">
-      {data.data.players.map((player) => (
-        <div key={player.id} className="player-card player-image-container">
-          <img
-            className="player-image"
-            src={player.imageUrl}
-            alt={player.name}
-          />
-
-          <div className="player-details">
-            <h2> {player.name} </h2>
-
-            {/* <p> {player.breed} </p>
-
-            <p> {player.status} </p> */}
-            <button>See Details</button>
-            <button
-              onClick={() => handleDelete(player.id)}
-              disabled={isLoading}
-            >
-              Delete
-            </button>
+    <div className="container">
+      <div className="row">
+        {data.data.players.map((player) => (
+          <div key={player.id} className="col-md-3 mb-4">
+            <div className="card">
+              <img
+                src={player.imageUrl}
+                className="card-img-top"
+                alt={player.name}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{player.name}</h5>
+                <p className="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <button type="button" className="btn btn-secondary">
+                  Details
+                </button>
+                <button
+                  onClick={() => handleDelete(player.id)}
+                  className="btn btn-danger ml-2"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
