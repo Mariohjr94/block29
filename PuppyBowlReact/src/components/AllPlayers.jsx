@@ -3,8 +3,6 @@ import { useDeletePlayerMutation } from "../API/index";
 import "../../src/index.css";
 import store from "../APP/store";
 import "bootstrap/dist/css/bootstrap.css";
-// import Button from "react-bootstrap/Button";
-// import Card from "react-bootstrap/Card";
 
 const Players = () => {
   const { data, error, isLoading } = useGetPlayersQuery();

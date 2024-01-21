@@ -1,12 +1,18 @@
 import "./index.css";
+import Header from "./components/NavBar";
 import AllPlayers from "./components/AllPlayers";
-import "bootstrap/dist/css/bootstrap.css";
+import NewPlayerForm from "./components/NewPlayerForm";
+import { Routes, Route, useParams } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <h1 className="text-center text successc my-5">Puppy Bowl</h1>
+      <Header />
       <AllPlayers />
+      <Routes>
+        <Route path="/players" Component={AllPlayers} />
+        <Route path="/add-players" Component={NewPlayerForm} />
+      </Routes>
     </>
   );
 }
