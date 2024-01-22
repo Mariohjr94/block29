@@ -8,7 +8,6 @@ function App() {
   return (
     <>
       <Header />
-      <AllPlayers />
       <Routes>
         <Route path="/players" Component={AllPlayers} />
         <Route path="/add-players" Component={NewPlayerForm} />

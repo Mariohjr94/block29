@@ -17,8 +17,19 @@ const puppyBowlApi = createApi({
         method: "DELETE",
       }),
     }),
+    addPlayer: builder.mutation({
+      query: (newPlayerData) => ({
+        url: "players/",
+        method: "POST",
+        body: newPlayerData,
+      }),
+    }),
   }),
 });
 
-export const { useGetPlayersQuery, useDeletePlayerMutation } = puppyBowlApi;
+export const {
+  useGetPlayersQuery,
+  useDeletePlayerMutation,
+  useAddPlayerMutation,
+} = puppyBowlApi;
 export default puppyBowlApi;

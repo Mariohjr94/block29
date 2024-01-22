@@ -21,7 +21,7 @@ const Header = () => {
       </Navbar.Brand>
       <Navbar.Toggle onClick={handleNavbarToggle} />
       <Navbar.Collapse in={isNavbarOpen} onExited={handleNavbarClose}>
-        <Nav className=" ml-auto">
+        <Nav className=" nav-bar ml-auto gap-3">
           <Nav.Link as={Link} to="/players">
             Players
           </Nav.Link>
