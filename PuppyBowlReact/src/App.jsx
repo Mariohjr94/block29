@@ -2,8 +2,7 @@ import "./index.css";
 import Header from "./components/NavBar";
 import AllPlayers from "./components/AllPlayers";
 import NewPlayerForm from "./components/NewPlayerForm";
-import { Routes, Route, useParams } from "react-router-dom";
-import Player from "./components/SinglePlayer";
+import { Routes, Route } from "react-router-dom";
 import SinglePlayer from "./components/SinglePlayer";
 
 function App() {

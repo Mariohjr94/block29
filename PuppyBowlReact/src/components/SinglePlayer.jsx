@@ -1,7 +1,8 @@
 import "bootstrap/dist/css/bootstrap.css";
-import React from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { useGetPlayerQuery } from "../API";
+import { useNavigate } from "react-router-dom";
 import {
   MDBCol,
   MDBContainer,
@@ -16,16 +17,31 @@ import {
 
 const SinglePlayer = () => {
   const { id } = useParams();
-  const { name, breed, imageUrl, status } = id;
+  const navigate = useNavigate();
+  const { data, error, isLoading } = useGetPlayerQuery(id);
 
-  const player = {
-    id,
-    name,
-    breed,
-    imageUrl,
-    status,
-  };
+  useEffect(() => {
+    // Fetch player details when the component mounts
+    // You may want to add error handling based on your API response structure
+    if (!isLoading && !error && data) {
+      console.log(data.data.player);
+    }
+  }, [data, error, isLoading]);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error fetching player details</p>;
+  }
+
+  if (!data || !data.data.player) {
+    return <p>Player not found</p>;
+  }
+
+  const player = data.data.player;
+  console.log(player);
   return (
     <div className="vh-100">
       <MDBContainer>
@@ -56,7 +72,11 @@ const SinglePlayer = () => {
                       </div>
                     </div>
                     <div className="d-flex pt-1">
-                      <MDBBtn outline className="me-1 flex-grow-1">
+                      <MDBBtn
+                        outline
+                        className="me-1 flex-grow-1"
+                        onClick={() => navigate("/players/")}
+                      >
                         Go back
                       </MDBBtn>
                     </div>

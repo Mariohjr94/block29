@@ -13,8 +13,8 @@ const Players = () => {
   const [players, setPlayers] = useState([]);
   const navigate = useNavigate();
 
-  const handleDetails = (player) => {
-    navigate(`/player/${player.id}`);
+  const handleDetails = (playerId) => {
+    navigate(`/player/${playerId}`);
   };
 
   const handleDelete = async (playerId) => {
@@ -41,37 +41,40 @@ const Players = () => {
   if (error) {
     return <p>error fetching players</p>;
   }
-  console.log(data);
+  // console.log(data.data.players);
 
   return (
     <div className="container">
       <div className="row">
         {data.data.players.map((player) => (
           <div key={player.id} className="col-md-3 mb-4">
-            <div className="card">
+            <div className="card h-100">
               <img
                 src={player.imageUrl}
-                className="card-img-top"
+                className="card-img-top object-fit-cover border rounded h-50"
                 alt={player.name}
               />
-              <div className="card-body">
+              <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{player.name}</h5>
                 <p className="card-text">Breed: {player.breed}</p>
-                <Link to={`/player/${player.id}`}>
+                <div className="d-flex flex-row mt-auto gap-2">
                   <button
-                    onClick={() => handleDetails(player)}
+                    onClick={() => handleDetails(player.id)}
                     type="button"
                     className="btn btn-secondary"
                   >
                     Details
                   </button>
-                </Link>
-                <button
-                  onClick={() => handleDelete(player.id)}
-                  className="btn btn-danger ml-2"
-                >
-                  Delete
-                </button>
+
+                  <Link>
+                    <button
+                      onClick={() => handleDelete(player.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
