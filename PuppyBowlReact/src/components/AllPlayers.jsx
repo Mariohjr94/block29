@@ -11,12 +11,15 @@ const Players = () => {
   const { data, error, isLoading } = useGetPlayersQuery();
   const [deletePlayer] = useDeletePlayerMutation();
   const [players, setPlayers] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
+  // handle details
   const handleDetails = (playerId) => {
     navigate(`/player/${playerId}`);
   };
 
+  //handle delete
   const handleDelete = async (playerId) => {
     try {
       await deletePlayer(playerId)(store.dispatch, store.getState, undefined);
@@ -28,6 +31,7 @@ const Players = () => {
     }
   };
 
+  //displayin players
   useEffect(() => {
     if (data && data.data) {
       setPlayers(data.data.players);
@@ -41,13 +45,41 @@ const Players = () => {
   if (error) {
     return <p>error fetching players</p>;
   }
-  // console.log(data.data.players);
+  console.log(players);
+  //search bar funtionality
+  const handleChange = (e) => {
+    e.preventDefault();
+    const inputValue = e.target.value;
+    setSearchInput(inputValue);
+    const updatePlayers = data.data.players.filter((player) => {
+      return player.name.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    setPlayers(updatePlayers);
+  };
 
   return (
     <div className="container">
+      <div className="search-bar">
+        <form
+          className="d-flex p-2 justify-content-center align-items-center"
+          role="search"
+        >
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={handleChange}
+            value={searchInput}
+          />
+          <button className="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
       <div className="row">
-        {data.data.players.map((player) => (
-          <div key={player.id} className="col-md-3 mb-4">
+        {players.map((player) => (
+          <div key={player.id} className="col-lg-4 col-md-6 col-sm-6 mb-4 sm-4">
             <div className="card h-100">
               <img
                 src={player.imageUrl}

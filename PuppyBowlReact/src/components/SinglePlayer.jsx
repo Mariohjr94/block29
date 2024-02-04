@@ -43,8 +43,8 @@ const SinglePlayer = () => {
   const player = data.data.player;
   console.log(player);
   return (
-    <div className="vh-100">
-      <MDBContainer>
+    <div className=" vh-100">
+      <MDBContainer className="vh-100">
         <MDBRow className="justify-content-center">
           <MDBCol md="9" lg="7" xl="5" className="mt-5">
             <MDBCard style={{ borderRadius: "15px" }}>

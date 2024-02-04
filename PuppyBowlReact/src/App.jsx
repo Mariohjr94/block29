@@ -10,6 +10,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/" Component={AllPlayers} />
         <Route path="/players" Component={AllPlayers} />
         <Route path="/add-players" Component={NewPlayerForm} />
         <Route path="/player/:id" Component={SinglePlayer} />
